@@ -1,0 +1,296 @@
+/* =======================================================
+   yaweb-theme.css  —  Minimal polish layer on Sneat Bootstrap.
+   Only overrides that Sneat doesn't already handle correctly.
+   Load LAST (after core.css and demo.css).
+   ======================================================= */
+
+/* ── Public Sans — self-hosted woff2 (no CDN dependency) ──
+   These files are variable fonts: one file covers all weights 100-900.
+   Latin-ext covers Spanish accented chars (á é í ó ú ñ ü etc).    */
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/admin/fonts/public-sans-normal-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/admin/fonts/public-sans-normal-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/admin/fonts/public-sans-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/admin/fonts/public-sans-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ── 0. CRITICAL: override Bootstrap CSS variables on the admin root ── */
+/* globals.css (Tailwind) is loaded globally and resets CSS vars we depend on.
+   Redefining them on .layout-wrapper wins the cascade for all descendants.   */
+.layout-wrapper {
+  --bs-body-color:     #4a5568;   /* darker body text — readable slate */
+  --bs-heading-color:  #1e293b;   /* near-black headings */
+  --bs-body-bg:        #f5f5f9;
+  --bs-body-font-family: "Public Sans", sans-serif;
+  --bs-body-font-size:   0.9375rem;
+
+  font-family: "Public Sans", sans-serif !important;
+  color: #4a5568 !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 0b. Explicit heading colors — don't rely on CSS var inheritance ── */
+.layout-wrapper h1,
+.layout-wrapper h2,
+.layout-wrapper h3,
+.layout-wrapper h4,
+.layout-wrapper h5,
+.layout-wrapper h6,
+.layout-wrapper .card-title,
+.layout-wrapper .h1,
+.layout-wrapper .h2,
+.layout-wrapper .h3,
+.layout-wrapper .h4,
+.layout-wrapper .h5,
+.layout-wrapper .h6 {
+  color: #1e293b !important;
+  font-family: "Public Sans", sans-serif !important;
+}
+
+/* ── 0c. Paragraph and general text — visible, not washed out ── */
+.layout-wrapper p,
+.layout-wrapper span:not(.badge):not(.avatar-initial),
+.layout-wrapper td,
+.layout-wrapper li {
+  font-family: "Public Sans", sans-serif !important;
+}
+
+/* ── 1. Global typography ── */
+/* (already handled above via .layout-wrapper) */
+
+/* ── 2. Cards — exact Sneat values ── */
+.card {
+  border-radius: 0.375rem !important;
+  border: 0 !important;
+  box-shadow: 0 0.1875rem 0.5rem 0 rgba(34, 48, 62, 0.1) !important;
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+a.card:hover,
+a.card:focus {
+  box-shadow: 0 0.375rem 1rem 0 rgba(105, 108, 255, 0.2) !important;
+  transform: translateY(-2px);
+  text-decoration: none;
+  outline: none;
+}
+
+/* ── 3. Sidebar — white theme (Sneat light) ── */
+.layout-menu,
+.bg-menu-theme,
+.layout-menu.menu {
+  background-color: #fff !important;
+  border-right: 1px solid rgba(34, 48, 62, 0.07) !important;
+  box-shadow: none !important;
+}
+
+/* Brand */
+.app-brand-text {
+  color: #1e293b !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+}
+
+/* Divider + shadow */
+.menu-divider      { border-color: rgba(34, 48, 62, 0.08) !important; }
+.menu-inner-shadow { background: linear-gradient(180deg, #fff 0%, transparent 100%) !important; }
+
+/* Section headers — Sneat: 11px uppercase #a1acb8 */
+.menu-inner > li.menu-header {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0 !important;
+}
+.menu-inner > li.menu-header .menu-header-text {
+  color: #a1acb8 !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+/* Menu links — Sneat exact spacing */
+.menu-inner > .menu-item > .menu-link,
+.menu-inner > .menu-item > button.menu-link {
+  color: #1e293b !important;
+  font-size: 0.9375rem !important;
+  font-weight: 400 !important;
+  border-radius: 0.375rem !important;
+  padding: 0.4rem 0.9375rem !important;   /* tighter vertical padding = Sneat FREE */
+  margin: 0.05rem 1rem !important;         /* minimal gap between items */
+  width: calc(100% - 2rem) !important;
+}
+
+/* Menu icons — Sneat: 22px, same color as text */
+.menu-inner > .menu-item > .menu-link .menu-icon,
+.menu-inner > .menu-item > button.menu-link .menu-icon {
+  color: #1e293b !important;
+  font-size: 1.375rem !important;
+}
+
+/* Hover — Sneat: rgba(105,108,255,0.08) bg, #696cff text */
+.menu-inner > .menu-item > .menu-link:hover,
+.menu-inner > .menu-item > button.menu-link:hover {
+  background: rgba(105, 108, 255, 0.08) !important;
+  color: #696cff !important;
+}
+.menu-inner > .menu-item > .menu-link:hover .menu-icon,
+.menu-inner > .menu-item > button.menu-link:hover .menu-icon {
+  color: #696cff !important;
+}
+
+/* Active — Sneat: rgba(105,108,255,0.16) bg, #696cff text, weight 500 */
+.menu-inner > .menu-item.active > .menu-link {
+  background: rgba(105, 108, 255, 0.16) !important;
+  color: #696cff !important;
+  font-weight: 500 !important;
+}
+.menu-inner > .menu-item.active > .menu-link .menu-icon {
+  color: #696cff !important;
+}
+
+/* Remove right-side indicator bar that appears on dark theme */
+.menu-inner > .menu-item.active > .menu-link::before { display: none !important; }
+
+/* Logout hover — red tone */
+.menu-inner > .menu-item > button.menu-link:hover {
+  background: rgba(234, 84, 85, 0.08) !important;
+  color: #ea5455 !important;
+}
+.menu-inner > .menu-item > button.menu-link:hover .menu-icon {
+  color: #ea5455 !important;
+  opacity: 1;
+}
+
+/* Mobile toggle chevron */
+.layout-menu-toggle .bx { color: #566a7f !important; }
+
+/* ── 4. Navbar ── */
+.layout-navbar.navbar-detached {
+  border-radius: 0.75rem !important;
+  box-shadow: 0 1px 8px rgba(38, 60, 122, 0.06) !important;
+}
+
+/* ── 5. Text colors — only safe narrow overrides ── */
+.text-muted { color: #8592a3 !important; }
+.form-text  { color: #8592a3 !important; font-size: 0.875rem !important; }
+
+/* ── 6. Forms — tablet-friendly sizing ── */
+.layout-wrapper .form-label,
+.form-label {
+  font-size: 0.9375rem !important;   /* 15px — readable, not tiny */
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  margin-bottom: 0.375rem !important;
+}
+.layout-wrapper .form-check-label,
+.form-check-label {
+  font-size: 0.9375rem !important;
+  color: #1e293b !important;
+}
+.layout-wrapper .form-control,
+.layout-wrapper .form-select,
+.form-control,
+.form-select {
+  font-size: 0.9375rem !important;
+  color: #1e293b !important;
+  min-height: 44px !important;        /* tablet touch target */
+  border-radius: 0.375rem !important;
+}
+textarea.form-control { min-height: unset !important; height: auto !important; }
+.input-group-text     { min-height: 44px !important; border-radius: 0.375rem !important; }
+
+/* ── 7. Buttons — tablet-friendly, uniform height ── */
+.btn {
+  font-size: 0.9375rem !important;
+  font-weight: 500 !important;
+  min-height: 44px !important;        /* Apple HIG minimum touch target */
+  border-radius: 0.375rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.btn-sm {
+  font-size: 0.8125rem !important;
+  min-height: 36px !important;
+}
+.btn-lg { font-size: 1.0625rem !important; min-height: 52px !important; }
+
+/* ── 8. Tables ── */
+.table td { font-size: 14px !important; vertical-align: middle !important; color: #1e293b !important; }
+.table td .text-body-secondary { color: #64748b !important; }
+.table th {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.07em !important;
+  text-transform: uppercase !important;
+  color: #64748b !important;
+}
+.table-hover > tbody > tr:hover {
+  background-color: rgba(105, 108, 255, 0.04) !important;
+}
+
+/* ── 9. Badges ── */
+.badge {
+  font-size: 12px !important;
+  border-radius: 6px !important;
+  padding: 4px 9px !important;
+}
+
+/* ── 10. Alerts ── */
+.alert {
+  border-radius: 10px !important;
+  font-size: 14px !important;
+}
+
+/* ── 11. Background ── */
+.layout-page { background-color: #f5f5f9; }
+
+/* ── 12. Quick action cards ── */
+.yw-action-card {
+  display: block;
+  text-decoration: none;
+  background: #fff;
+  border-radius: 0.375rem;
+  padding: 20px;
+  box-shadow: 0 0.1875rem 0.5rem 0 rgba(34, 48, 62, 0.1);
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+  color: inherit;
+}
+.yw-action-card:hover {
+  box-shadow: 0 0.375rem 1rem 0 rgba(105, 108, 255, 0.2);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ── 13. Tablet / touch targets ── */
+@media (max-width: 1199.98px) {
+  .menu-inner > .menu-item > .menu-link,
+  .menu-inner > .menu-item > button.menu-link {
+    padding: 12px 14px !important;
+  }
+}
